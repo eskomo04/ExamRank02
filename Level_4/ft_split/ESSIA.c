@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ESSIA.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: essiakomo <essiakomo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eskomo <eskomo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 18:42:21 by essiakomo         #+#    #+#             */
-/*   Updated: 2026/02/07 12:56:04 by essiakomo        ###   ########.fr       */
+/*   Updated: 2026/02/07 16:07:08 by eskomo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int word_count(char *s)
 	
 	while (*s)
 	{
-		if ((*s != '\t' || *s != ' ') && inword == 0)
+		if ((*s != '\t' && *s != ' ') && inword == 0)
 		{
 			inword = 1;
 			count++;
 		}
-		else
+		else if (*s == ' ' || *s == '\t')
 			inword = 0;
 		s++;
 	}
@@ -54,10 +54,10 @@ char    **ft_split(char *str)
 	{
 		while (is_delimiter(*str))
 			str++;
-		if (!str)
+		if (*str == '\0')
 			break;
 		start = str;
-		while (!is_delimiter(*str))
+		while (!is_delimiter(*str) && *str)
 			str++;
 		len_word = str - start;
 		arr[i] = (char *)malloc(sizeof(char) * (len_word + 1));
@@ -79,7 +79,7 @@ char    **ft_split(char *str)
 
 int	main(void)
 {
-	char *s = "There     should be an array of 8         words! ";
+	char *s = "There     should be an array of 8         words!  ";
 	char **array = ft_split(s);
 	int i = 0;
 	int count = word_count(s);

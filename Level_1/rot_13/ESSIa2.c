@@ -1,44 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ESSIA.c                                            :+:      :+:    :+:   */
+/*   ESSIa2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: essiakomo <essiakomo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/09 15:29:08 by essiakomo         #+#    #+#             */
-/*   Updated: 2026/02/09 15:38:39 by essiakomo        ###   ########.fr       */
+/*   Created: 2026/02/09 17:02:01 by essiakomo         #+#    #+#             */
+/*   Updated: 2026/02/09 17:17:16 by essiakomo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putnbr(int nbr)
+void	rot_13(char *s)
 {
-	char c;
-
-	if (nbr > 9)
-		ft_putnbr(nbr / 10);
-	c = (nbr % 10) + '0';
-	write(1, &c, 1);
+	int i = 0;
+	while (s[i])
+	{
+		if (s[i] >= 'a' && s[i] <= 'z')
+			s[i] = ((s[i] - 'a' + 13) % 26) + 'a'; 
+		else if (s[i] >= 'A' && s[i] <= 'Z')
+			s[i] = ((s[i] - 'A' + 13) % 26) + 'A';
+		i++;
+	}
 }
 
 
-int main(void)
+int main(int argc, char **argv)
 {
-	int i = 1;
-	while (i <= 100)
+	int i = 0;
+	if (argc == 2)
 	{
-		if ((i % 5 == 0) && (i % 3 == 0))
-			write(1, "fizzbuzz\n", 9);
-		else if (i % 5 == 0)
-			write(1, "buzz\n", 5);
-		else if (i % 3 == 0)
-			write(1, "fizz\n", 5);
-		else
+		rot_13(argv[1]);
+		while (argv[1][i])
 		{
-			ft_putnbr(i);
-			write(1, "\n", 1);
+			write(1, &argv[1][i], 1);
+			i++;
 		}
-		i++;
 	}
+	write(1, "\n", 1);
+	return (0);
 }

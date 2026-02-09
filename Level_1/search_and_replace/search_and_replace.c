@@ -1,51 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   search_and_replace.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sarfreit <sarfreit@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/07 03:53:57 by sarfreit          #+#    #+#             */
-/*   Updated: 2025/12/07 03:53:57 by sarfreit         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include <unistd.h>
 
-int	args_len(char *argv)
-{
-	int	len;
+#include <unistd.h> //To call write()
 
-	len = 0;
-	while (argv[len])
-		len++;
-	return (len);
+void	search_and_replace(char *s, char search, char replace) //Define a function takes three arguments: a string, a substring, and a replacement substring. The function searches for all occurrences of the `search` character in `str` and replaces them with the `replace` character
+{								   
+	while (*s) //Loop until the end of the first string is reached
+	{
+		if (*s == search) //Search for the letter from the 2nd argument in the first string. When found, asign this letter to the current character of the string
+			*s = replace; //Replace the letter from the 2nd argument, with the letter from the third argument
+		write(1, s++, 1); //Write the current character to the standard output before incrememnting to the nexrt
+	}
 }
 
-int	is_equal(char argv1, char argv2)
+int main(int argc, char **argv) //argv is a pointer to an array of strings. By using a double pointer char **argv, the program can access and retrieve each individual argument as a null-terminated string
 {
-	if (argv1 == argv2)
-		return (1);
-	return (0);
-}
-
-int	main(int argc, char *argv[])
-{
-	int	j;
-
-	if ((argc != 4) || (args_len(argv[2]) > 1) || (args_len(argv[3]) > 1))
-	{
-		write(1, "\n", 1);
-		return (0);
-	}
-	j = 0;
-	while (argv[1][j])
-	{
-		if (is_equal(argv[1][j], argv[2][0]) == 1)
-			argv[1][j] = argv[3][0];
-		write(1, &argv[1][j], 1);
-		j++;
-	}
+	if (argc == 4 && !argv[2][1] & !argv[3][1]) //Perform operations only if argc is four, meaning there are exactly three arguments in addition to the program name && if the 2nd and 3rd arguments are single characters
+		search_and_replace(argv[1], argv[2][0], argv[3][0]);	   //e.g `argv[2][1]` gets evaluated first, before the `!` is applied, and in effect, negates or 'flips' the result. If `argv[2]` is a single character, then `argv[2][1]` will be '0' representing '\0'. The result of `argv[2][1]` then, is '0', or 'false' (Similarly, the expression `while (*str)` is 'true' until the '\0' is reached). The `!` is then applied, making `argv[2][1]` from 'false' to 'true', and from '0' to '1'. The bitwise operation `&` means, both sides of `&` must equate to '1', for it to be 'true', else it will be 'false', deeming the while loop conditions not met
 	write(1, "\n", 1);
 	return (0);
 }

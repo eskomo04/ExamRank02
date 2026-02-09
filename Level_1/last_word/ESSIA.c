@@ -5,40 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: essiakomo <essiakomo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/09 15:29:08 by essiakomo         #+#    #+#             */
-/*   Updated: 2026/02/09 15:38:39 by essiakomo        ###   ########.fr       */
+/*   Created: 2026/02/09 16:04:12 by essiakomo         #+#    #+#             */
+/*   Updated: 2026/02/09 16:27:31 by essiakomo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putnbr(int nbr)
+int is_space(char c)
 {
-	char c;
-
-	if (nbr > 9)
-		ft_putnbr(nbr / 10);
-	c = (nbr % 10) + '0';
-	write(1, &c, 1);
+	if (c == ' ' || c == '\t')
+		return (1);
+	return (0);
 }
 
-
-int main(void)
+int main(int argc, char **argv)
 {
-	int i = 1;
-	while (i <= 100)
+	int len = 0;
+	if (argc == 2)
 	{
-		if ((i % 5 == 0) && (i % 3 == 0))
-			write(1, "fizzbuzz\n", 9);
-		else if (i % 5 == 0)
-			write(1, "buzz\n", 5);
-		else if (i % 3 == 0)
-			write(1, "fizz\n", 5);
-		else
+		while (argv[1][len])
+			len++;
+		len--;
+		while (is_space(argv[1][len]) && len >= 0)
+			len--;
+		while (!is_space(argv[1][len]) && len >= 0)
+			len--;
+		len++;
+		while (!is_space(argv[1][len]) && argv[1][len])
 		{
-			ft_putnbr(i);
-			write(1, "\n", 1);
+			write(1, &argv[1][len], 1);
+			len++;
 		}
-		i++;
 	}
+	write(1, "\n", 1);
+	return (0);
 }

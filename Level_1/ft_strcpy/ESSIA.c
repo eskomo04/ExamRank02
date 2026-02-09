@@ -5,40 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: essiakomo <essiakomo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/09 15:29:08 by essiakomo         #+#    #+#             */
-/*   Updated: 2026/02/09 15:38:39 by essiakomo        ###   ########.fr       */
+/*   Created: 2026/02/09 15:47:24 by essiakomo         #+#    #+#             */
+/*   Updated: 2026/02/09 15:53:42 by essiakomo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putnbr(int nbr)
+char    *ft_strcpy(char *s1, char *s2)
 {
-	char c;
-
-	if (nbr > 9)
-		ft_putnbr(nbr / 10);
-	c = (nbr % 10) + '0';
-	write(1, &c, 1);
-}
-
-
-int main(void)
-{
-	int i = 1;
-	while (i <= 100)
+	int i = 0;
+	if(!s2)
+		return (0);
+	while (s2[i])
 	{
-		if ((i % 5 == 0) && (i % 3 == 0))
-			write(1, "fizzbuzz\n", 9);
-		else if (i % 5 == 0)
-			write(1, "buzz\n", 5);
-		else if (i % 3 == 0)
-			write(1, "fizz\n", 5);
-		else
-		{
-			ft_putnbr(i);
-			write(1, "\n", 1);
-		}
+		s1[i] = s2[i];
 		i++;
 	}
+	s1[i] = '\0';
+	return(s1);
 }

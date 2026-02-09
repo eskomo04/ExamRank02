@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ESSIA.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eskomo <eskomo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/06 09:25:11 by sarfreit          #+#    #+#             */
-/*   Updated: 2026/02/09 00:33:03 by eskomo           ###   ########.fr       */
+/*   Created: 2026/02/09 02:18:40 by eskomo            #+#    #+#             */
+/*   Updated: 2026/02/09 02:25:00 by eskomo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_swap(int *a, int *b)
+
+#include <unistd.h>
+
+int main(int argc, char **argv)
 {
-	int	temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
+	int i = 0;
+	if (argc == 2)
+	{
+		while (argv[1][i])
+			i++;
+		while (--i >= 0)
+			write(1, &argv[1][i], 1);
+	}
+	write(1,"\n", 1);
+	return (0);
 }
-
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	int	a = 1;
-// 	int b = 2;
-
-// 	ft_swap(&a, &b);
-
-// 	printf("a is %d, b is %d", a, b);
-
-// 	return (0);
-// }

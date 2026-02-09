@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ESSIA2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eskomo <eskomo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/06 09:25:11 by sarfreit          #+#    #+#             */
-/*   Updated: 2026/02/09 00:33:03 by eskomo           ###   ########.fr       */
+/*   Created: 2026/02/08 21:02:12 by eskomo            #+#    #+#             */
+/*   Updated: 2026/02/08 21:19:02 by eskomo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_swap(int *a, int *b)
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(int argc, char **argv)
 {
-	int	temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
+	int i = 2;
+	int nbr;
+	if (argc == 2)
+	{
+		nbr = atoi(argv[1]);
+		if (nbr == 1)
+			printf("1");
+		while (nbr >= i)
+		{
+			if (nbr % i == 0)
+			{
+				printf("%d", i);
+				if (nbr != i)
+					printf("*");
+				nbr = nbr / i;
+			}
+			else
+				i++;
+		}
+	}
+	printf("\n");
+	return(0);
 }
-
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	int	a = 1;
-// 	int b = 2;
-
-// 	ft_swap(&a, &b);
-
-// 	printf("a is %d, b is %d", a, b);
-
-// 	return (0);
-// }

@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ESSIA.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eskomo <eskomo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/06 09:25:11 by sarfreit          #+#    #+#             */
-/*   Updated: 2026/02/09 00:33:03 by eskomo           ###   ########.fr       */
+/*   Created: 2026/02/09 02:27:44 by eskomo            #+#    #+#             */
+/*   Updated: 2026/02/09 02:58:22 by eskomo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_swap(int *a, int *b)
-{
-	int	temp;
+#include <unistd.h>
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
+
+void	rotate(char *str)
+{
+	while (*str)
+	{
+		if (*str >= 'a' && *str <= 'z')
+			*str = ((*str - 'a') + 13) % 26 + 'a';
+		else if (*str >= 'A' && *str <= 'Z')
+			*str = ((*str - 'A') + 13) % 26 + 'A';
+		write(1, str++, 1);
+	}
 }
 
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	int	a = 1;
-// 	int b = 2;
-
-// 	ft_swap(&a, &b);
-
-// 	printf("a is %d, b is %d", a, b);
-
-// 	return (0);
-// }
+int main(int argc, char **argv)
+{
+	if (argc == 2)
+		rotate(argv[1]);
+	write(1, "\n", 1);
+	return (0);
+}
